@@ -46,10 +46,8 @@ class Scrapindeed():
         driver.get(url)
         response = WebDriverWait(driver, 30).until(ec.presence_of_element_located((By.ID, 'jobsearch-Main')))
         parent = response.find_element(By.CSS_SELECTOR, '.jobsearch-ResultsList')
-        children = parent.find_elements(By.TAG_NAME, 'li')
+        children = parent.find_elements(By.XPATH, "//a[@class='jcs-JobTitle css-jspxzf eu4oa1w0']")
         result = []
         for i in children:
-            data = i.find_element(By.XPATH, "//a[@class='jcs-JobTitle css-jspxzf eu4oa1w0']").get_attribute('href')
-            result.append(data)
-
+            result.append(i.get_attribute('href'))
         return result
